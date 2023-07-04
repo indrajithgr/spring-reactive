@@ -1,0 +1,6 @@
+spring:
+  config:
+    name: learning-reactive-programming
+
+server:
+  port: 8081
