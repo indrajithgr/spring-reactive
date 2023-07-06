@@ -1,6 +1,6 @@
 spring:
-  config:
-    name: learning-reactive-programming
+  application:
+    name: learning-reactive-programing
 
 server:
   port: 8081
