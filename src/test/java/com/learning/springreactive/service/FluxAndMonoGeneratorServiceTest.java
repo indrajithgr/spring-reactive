@@ -14,6 +14,23 @@ public class FluxAndMonoGeneratorServiceTest {
         StepVerifier.create(namesFlux).expectNext("Alice", "Bob", "Attacker").verifyComplete();
         StepVerifier.create(namesFlux).expectNext("Alice").expectNextCount(2).verifyComplete();
     }
+    @Test
+    public void test_getNamesFluxMapped() {
+        var namesFlux = classUnderTest.getNamesFluxMapped();
+        StepVerifier.create(namesFlux).expectNext("ALICE").expectNextCount(1)
+                .expectNext("ATTACKER").verifyComplete();
+    }
+    @Test
+    public void test_getNamesFluxMappedWithFilter() {
+        var namesFlux = classUnderTest.getNamesFluxMappedWithFilter(3);
+        StepVerifier.create(namesFlux).expectNext("ALICE").expectNextCount(1)
+                .verifyComplete();
+    }
+    @Test
+    public void test_getNamesFluxMappedWithFilterCombination() {
+        var namesFlux = classUnderTest.getNamesFluxMappedWithFilterCombination(3);
+        StepVerifier.create(namesFlux).expectNext("5-ALICE","8-ATTACKER").verifyComplete();
+    }
 
     @Test
     public void test_getNameMono() {
