@@ -1,0 +1,45 @@
+Take away notes.
+
+reactor.core.publisher.Flux
+---------------------------
+
+ for returning 0 to n number of elements.
+
+.log()
+    method will log the events
+
+.doOnComplete()
+    takes a function as input and executes it once the process is completed
+
+.map()
+    similar to streams.map(), just accepts a function to convert to another object type.
+
+.filter()
+    similar to streams.filter(), just filters out the results based on the condition provided.
+
+.subscribe()
+    for subscribing to the events.
+
+reactor.core.publisher.Mono
+---------------------------
+
+ for returning 0 to 1 number of element.
+
+ .log(), .doOnComplete(), .subscribe() works similar to Flex.
+
+
+Unit Testing.
+
+reactor.test.StepVerifier
+------------------------
+    To verify Flex and Mono
+
+.create() : lazily creates a publisher,accepts a flux or mono.
+            Prepare a new StepVerifier in an uncontrolled environment: StepVerifier.Step.thenAwait will block in real time. Each verify() will fully (re)play the scenario.
+            Params: publisher – the publisher to subscribe to and verify
+            Returns: a builder for expectation declaration and ultimately verification.
+
+expectNext() : for evaluating next result, accepts results as parameter, intermediate operation.
+.expectNextCount(n) : accepts count as parameter, for verifying size, intermediate operation.
+.verifyComplete() : to mark verification is completed, this is terminal operation
+
