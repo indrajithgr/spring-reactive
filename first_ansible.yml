@@ -1,0 +1,13 @@
+---
+  - name: "Working with ansible localhost"
+    hosts: localhost
+
+    tasks:
+
+       - name: "Ping localhost"
+         ping:
+
+       - name: "find module"
+         find:
+          paths: /Users/indrajith/Documents/handsOnTrainings/spring-reactive
+          file_type: file
