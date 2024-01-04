@@ -10,22 +10,24 @@ import java.util.List;
 @Slf4j
 @Service
 public class FluxAndMonoGeneratorService {
+    public static final String ALICE = "Alice";
+    public static final String ATTACKER = "Attacker";
 
     public Flux<String> getNamesFlux() {
-        return Flux.fromIterable(List.of("Alice", "Bob", "Attacker")).log()
+        return Flux.fromIterable(List.of(ALICE, "Bob", ATTACKER)).log()
                 .doOnComplete(() -> System.out.println("all data received"));
     }
     public Flux<String> getNamesFluxMapped() {
-        return Flux.fromIterable(List.of("Alice", "Bob", "Attacker"))
+        return Flux.fromIterable(List.of(ALICE, "Bob", ATTACKER))
                 .map(String::toUpperCase).log();
     }
     public Flux<String> getNamesFluxMappedWithFilter(final int minLength) {
-        return Flux.fromIterable(List.of("Alice", "Bob", "Attacker"))
+        return Flux.fromIterable(List.of(ALICE, "Bob", ATTACKER))
                 .map(String::toUpperCase)
                 .filter(s -> s.length() > minLength);
     }
     public Flux<String> getNamesFluxMappedWithFilterCombination(final int minLength) {
-        return Flux.fromIterable(List.of("Alice", "Bob", "Attacker"))
+        return Flux.fromIterable(List.of(ALICE, "Bob", ATTACKER))
                 .map(String::toUpperCase)
                 .filter(s -> s.length() > minLength)
                 .map(s -> s.length() + "-" + s);

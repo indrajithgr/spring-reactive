@@ -39,7 +39,69 @@ reactor.test.StepVerifier
             Params: publisher – the publisher to subscribe to and verify
             Returns: a builder for expectation declaration and ultimately verification.
 
-expectNext() : for evaluating next result, accepts results as parameter, intermediate operation.
+.expectNext() : for evaluating next result, accepts results as parameter, intermediate operation.
 .expectNextCount(n) : accepts count as parameter, for verifying size, intermediate operation.
 .verifyComplete() : to mark verification is completed, this is terminal operation
 
+.map() : 1 to 1 transformation, does not supports publisher
+.flatmap() :: will not preserve order,asynchronous methods,  1 to n transformation, supports publisher
+.concatmap() :: preserves order works similar to flatMap();
+.flatMapMany() :: This is a Mono operator which is used to transform a Mono object into a Flux object
+.transform() :: accepts a functional interface, use to transform from T to R with Function<T,R>
+
+.defaultIfEmpty() :: returns a default flux value if the data received is empty.
+.switchIfEmpty() ::  it starts emitting from the specified alternative producer if the source producer is empty
+
+concatenation of two reactive streams(.concat() & .concatWith())
+
+use to combine two reactive streams,
+happens in a sequence first one subscribed first and then completes, then second one is subscribed and completes
+
+.concat() :: static method in Flux
+.concatWith() :: instance method in Flux and Mono.
+
+Publishers are subscribed eagerly and the merge happens in an interleaved fashion (both the publishers are called at the same time)
+.merge() :: static method in Flux
+.mergeWith() :: instance method in Flux and Mono.
+
+.mergeSequential():: static method in Flux
+                     Publishers are subscribed eagerly
+                     merge happens in a sequence
+
+.zip() :: static method in Flux
+          takes two publishers and a behavior to combine the publishers (logic to be applied to zip)
+          this method waits for all publishers to emit one element then apply the behavior and the process follows till the end.
+          can be used to zip up-to 2-8 publishers into one.
+
+.zipWith() :: instance function part of Flux and Mono
+              used to zip two publishers into one.
+              this method waits for all publishers to emit one element then apply the behavior and the process follows till the end.
+              continues until one of the publishers send an onComplete event.
+
+Note: in case of both .zip() and .zipWith() publishers and subscribers are called eagerly.
+
+
+
+flatmapsequential() ::
+
+
+Functional Endpoints in Spring
+
+Regarding mongo db installation and commands
+
+To start mongodb/brew/mongodb-community@4.4 now and restart at login:
+brew services start mongodb-community@4.4
+
+To Stop mongodb
+brew services stop mongodb-community@4.4
+
+To run MongoDB (i.e. the mongod process) manually as a background process
+mongod --config /opt/homebrew/etc/mongod.conf --fork
+
+Streaming endpoints
+
+a kind of endpoint which continuously sends updates to the clients as the new data arrives.
+similar to SSE - server send events
+examples : Stock tickers, real time updates of sports events
+
+target is 11 for next week
