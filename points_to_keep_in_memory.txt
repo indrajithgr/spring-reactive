@@ -105,3 +105,26 @@ similar to SSE - server send events
 examples : Stock tickers, real time updates of sports events
 
 target is 11 for next week
+
+reference for implementing health endpoint
+https://www.baeldung.com/spring-boot-actuators
+
+For docker build
+docker build -t indrajithgr/spring-reactive:0.0.1 .
+
+View a summary of image vulnerabilities and recommendations
+docker scout quickview
+
+View vulnerabilities → docker scout cves local://indrajithgr/spring-reactive:0.0.1
+View base image update recommendations → docker scout recommendations local://indrajithgr/spring-reactive:0.0.1
+Include policy results in your quickview by supplying an organization → docker scout quickview local://indrajithgr/spring-reactive:0.0.1 --org <organization>
+
+
+For pushing docker repository.
+docker push indrajithgr/spring-reactive:0.0.1
+
+docker run -p 8080:8081 indrajithgr/spring-reactive
+
+for deploying to k8s cluster
+kubectl apply -f manifests
+

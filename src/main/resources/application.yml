@@ -2,5 +2,10 @@ spring:
   application:
     name: learning-reactive-programing
 
+management:
+  endpoint:
+    web:
+      exposure:
+        include: health
 server:
   port: 8081

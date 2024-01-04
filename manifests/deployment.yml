@@ -1,0 +1,46 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: spring-reactive
+  labels:
+    app: spring-reactive-app
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      component: spring-reactive-app
+  template:
+    metadata:
+      labels:
+        component: spring-reactive-app
+    spec:
+      containers:
+        - name: app-container
+          image: indrajithgr/spring-reactive:0.0.1
+          readinessProbe:
+            httpGet:
+              path: /actuator/health
+              port: 8081
+            initialDelaySeconds: 30
+            periodSeconds: 10
+            timeoutSeconds: 5
+          ##envFrom:
+          ##  - configMapRef:
+          ##     name: configmap-spring-reactive-app
+          ##  - secretRef:
+          ##      name: secrets-spring-reactive-app
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 8081
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: spring-reactive-app
+spec:
+  type: ClusterIP
+  selector:
+    component: spring-reactive-app
+  ports:
+    - port: 80
+      targetPort: 8081
